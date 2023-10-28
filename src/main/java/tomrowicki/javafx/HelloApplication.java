@@ -28,7 +28,7 @@ public class HelloApplication extends Application {
 
 
 
-        stage.setScene(HboxScene.getScene(stage));
+        stage.setScene(BorderPaneScene.getScene(stage));
         stage.show();
     }
 

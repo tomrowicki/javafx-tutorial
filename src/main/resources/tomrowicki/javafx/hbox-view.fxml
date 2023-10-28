@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<!--This is a pane based on an idea to place elements one after the other, from left to right and from top to bottom
+- as in a text document; commonly used for dialog windows-->
+<?import javafx.geometry.Insets?>
+<HBox alignment="bottom_right" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tomrowicki.javafx.HelloController"
+      style="-fx-border-color: red; -fx-border-width: 3; -fx-border-style: dashed"
+      spacing="10">
+    <padding>
+        <Insets bottom="10" right="10"></Insets>
+    </padding>
+
+    <Button text="Okay" prefWidth="90"></Button>
+    <Button text="Cancel" prefWidth="90"></Button>
+    <Button text="Help" prefWidth="90"></Button>
+
+</HBox>

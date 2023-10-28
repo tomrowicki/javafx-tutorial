@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.geometry.Insets?>
+<!--This is a pane based on a grid - as in chessboard/Word table structure-->
+<GridPane alignment="top_center" vgap="10" hgap="10" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="tomrowicki.javafx.HelloController"
+          gridLinesVisible="true">
+    <padding>
+        <Insets top="10"></Insets>
+    </padding>
+    <columnConstraints>
+        <!--        sets width for a column (without it, it scales with the widest element)-->
+        <!--        each line coresponds to subsequent column in the grid-->
+        <ColumnConstraints percentWidth="50.0"></ColumnConstraints>
+        <ColumnConstraints percentWidth="50.0"></ColumnConstraints>
+    </columnConstraints>
+    <!--    each column is as wide as the widest element in the column-->
+    <!--    hgap is gap between columns in pixels, vgap - between rows -->
+    <Button text="Button One" GridPane.rowIndex="0" GridPane.columnIndex="0"></Button>
+    <Button text="Button Two" GridPane.rowIndex="0" GridPane.columnIndex="1"></Button>
+    <Button text="Button Three" GridPane.rowIndex="1" GridPane.columnIndex="0"></Button>
+    <Button text="Really Long Button Four" GridPane.rowIndex="1" GridPane.columnIndex="1"></Button>
+    <Button text="Button Five" GridPane.rowIndex="2" GridPane.columnIndex="0"></Button>
+
+</GridPane>

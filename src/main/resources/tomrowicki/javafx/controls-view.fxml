@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<GridPane alignment="CENTER" vgap="10" hgap="10" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="tomrowicki.javafx.HelloController">
+
+    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="Click me">
+        <graphic>
+            <ImageView>
+                <Image url="@../javafx/icons8-light-bulb.gif"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" text="This is a label">
+        <graphic>
+            <ImageView>
+                <Image url="@../javafx/label-tag-icon-by-Vexels.png" requestedWidth="50" requestedHeight="50"/>
+            </ImageView>
+        </graphic>
+    </Label>
+
+</GridPane>

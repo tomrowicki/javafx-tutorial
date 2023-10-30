@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.TilePane?>
+
+<!--This pane is piling elements on top of each other; can use to place text on an image, create borders etc.-->
+<?import javafx.scene.layout.StackPane?>
+<StackPane fx:controller="tomrowicki.javafx.HelloController"
+           xmlns:fx="http://javafx.com/fxml">
+
+    <Button text="Buttone One" style="-fx-background-color: red"/>
+    <Label text="Label text" style="-fx-background-color: green"/>
+</StackPane>
+
+
+

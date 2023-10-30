@@ -17,6 +17,18 @@
         BorderPane.alignment="CENTER"></Label>
     </top>
 
+    <center>
+        <Label text="This label is in the central position and has a reeeeallly loooooooooooooooooooooooooooooooong text"/>
+    </center>
+
+    <left>
+        <Label text="This label is in the left position"/>
+    </left>
+
+    <right>
+        <Label text="This label is in the right position"/>
+    </right>
+
     <!--    Embedding a child layout within the main one-->
     <bottom>
         <HBox spacing="10" alignment="CENTER_RIGHT">

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--This pane is similar to HBox/VBox but based on its orientation allows to move children not fitting the space
+to be moved to the next one (new line)-->
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Button?>
+<FlowPane fx:controller="tomrowicki.javafx.HelloController"
+          xmlns:fx="http://javafx.com/fxml"
+          orientation="VERTICAL">
+
+    <Button text="Buttone One"/>
+    <Button text="Buttone Two"/>
+    <Button text="Buttone Three"/>
+    <Button text="Buttone Four"/>
+    <Button text="Buttone Five"/>
+    <Button text="Buttone Six"/>
+    <Button text="Buttone Seven"/>
+    <Button text="Buttone Eight"/>
+    <Button text="Buttone Nine"/>
+    <Button text="Buttone Ten"/>
+</FlowPane>
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Label?>
+
+<!--This pane allows to anchor children to its edges-->
+<BorderPane fx:controller="tomrowicki.javafx.BorderController"
+            xmlns:fx="http://javafx.com/fxml">
+
+</BorderPane>
+
+
+

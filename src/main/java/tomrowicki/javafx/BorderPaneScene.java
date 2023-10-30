@@ -11,7 +11,7 @@ public class BorderPaneScene {
     static Scene getScene(Stage stage) throws IOException {
         stage.setTitle("Welcome to BorderPane!");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("borderpane-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 240);
 
         return scene;
     }

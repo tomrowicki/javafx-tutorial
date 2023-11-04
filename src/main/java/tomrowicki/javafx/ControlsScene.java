@@ -11,7 +11,7 @@ public class ControlsScene {
     static Scene getScene(Stage stage) throws IOException {
         stage.setTitle("Welcome to Controls lesson!");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("controls-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
 
         return scene;
     }

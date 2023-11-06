@@ -1,9 +1,11 @@
 package tomrowicki.javafx;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class EventsController {
@@ -15,6 +17,8 @@ public class EventsController {
     private Button byeButton;
     @FXML
     private CheckBox ourCheckbox;
+    @FXML
+    private Label ourLabel;
 
     // this requires the exact name 'initialize' to work outside the box
     @FXML
@@ -34,6 +38,23 @@ public class EventsController {
         } else if (e.getSource().equals(byeButton)) {
             System.out.printf("Bye, %s!%n", nameField.getText());
         }
+
+        // long calculation
+        Runnable task = () -> {
+            try {
+                String s = Platform.isFxApplicationThread() ? "UI Thread" : "Background Thread";
+                System.out.println("I'm going to sleep on: " + s);
+                Thread.sleep(5_000);
+                Platform.runLater(() -> {
+                    ourLabel.setText("We did something!");
+                    String s2 = Platform.isFxApplicationThread() ? "UI Thread" : "Background Thread";
+                    System.out.println("I'm waking up on: " + s2);
+                });
+            } catch (InterruptedException ex) {
+            }
+        };
+        new Thread(task).start();
+
         if (ourCheckbox.isSelected()) {
             nameField.clear();
             helloButton.setDisable(true);

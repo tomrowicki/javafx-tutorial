@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="tomrowicki.javafx.EventsController"
@@ -19,5 +20,7 @@
     <CheckBox fx:id="ourCheckbox" text="Clear the field after saying hello or goodbye"
     GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"
     onAction="#handleChange"/>
+
+    <Label fx:id="ourLabel" text="Nothing has happened" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
 
 </GridPane>

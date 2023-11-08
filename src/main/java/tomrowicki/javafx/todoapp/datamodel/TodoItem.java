@@ -38,4 +38,9 @@ public class TodoItem {
 
     private String details;
     private LocalDate deadline;
+
+    @Override
+    public String toString() {
+        return shortDescription;
+    }
 }

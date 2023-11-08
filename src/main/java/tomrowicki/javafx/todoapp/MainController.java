@@ -1,5 +1,9 @@
 package tomrowicki.javafx.todoapp;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import tomrowicki.javafx.todoapp.datamodel.TodoItem;
 
 import java.time.LocalDate;
@@ -8,6 +12,10 @@ import java.util.List;
 public class MainController {
 
     private List<TodoItem> todoItems;
+    @FXML
+    private ListView<TodoItem> todoListView;
+    @FXML
+    private TextArea itemDetailsTextArea;
 
     public void initialize() {
         TodoItem item1 = new TodoItem("Birthday card",
@@ -27,5 +35,18 @@ public class MainController {
                 LocalDate.of(2023, 12, 6));
 
        todoItems = List.of(item1, item2, item3, item4, item5);
+       todoListView.getItems().setAll(todoItems);
+        // setup for being able to select only one item at a time
+        todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    @FXML
+    public void handleClickListView() {
+        TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+        StringBuilder sb = new StringBuilder(item.getDetails());
+        sb.append("\n\n\n\n");
+        sb.append("Due: ");
+        sb.append(item.getDeadline().toString());
+        itemDetailsTextArea.setText(sb.toString());
     }
 }

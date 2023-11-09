@@ -1,6 +1,7 @@
 package tomrowicki.javafx.todoapp;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
@@ -16,6 +17,8 @@ public class MainController {
     private ListView<TodoItem> todoListView;
     @FXML
     private TextArea itemDetailsTextArea;
+    @FXML
+    private Label deadlineLabel;
 
     public void initialize() {
         TodoItem item1 = new TodoItem("Birthday card",
@@ -35,18 +38,30 @@ public class MainController {
                 LocalDate.of(2023, 12, 6));
 
        todoItems = List.of(item1, item2, item3, item4, item5);
+
+       todoListView.getSelectionModel().selectedItemProperty()
+               .addListener((observableValue, oldItem, newItem) -> {
+           if (newItem != null) {
+               TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+               itemDetailsTextArea.setText(item.getDetails());
+           }
+       });
+
        todoListView.getItems().setAll(todoItems);
         // setup for being able to select only one item at a time
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        todoListView.getSelectionModel().selectFirst();
     }
 
     @FXML
     public void handleClickListView() {
         TodoItem item = todoListView.getSelectionModel().getSelectedItem();
-        StringBuilder sb = new StringBuilder(item.getDetails());
-        sb.append("\n\n\n\n");
-        sb.append("Due: ");
-        sb.append(item.getDeadline().toString());
-        itemDetailsTextArea.setText(sb.toString());
+        itemDetailsTextArea.setText(item.getDetails());
+        deadlineLabel.setText(item.getDeadline().toString());
+//        StringBuilder sb = new StringBuilder(item.getDetails());
+//        sb.append("\n\n\n\n");
+//        sb.append("Due: ");
+//        sb.append(item.getDeadline().toString());
+//        itemDetailsTextArea.setText(sb.toString());
     }
 }

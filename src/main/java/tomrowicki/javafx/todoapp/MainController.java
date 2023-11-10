@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import tomrowicki.javafx.todoapp.datamodel.TodoItem;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MainController {
@@ -44,6 +45,8 @@ public class MainController {
            if (newItem != null) {
                TodoItem item = todoListView.getSelectionModel().getSelectedItem();
                itemDetailsTextArea.setText(item.getDetails());
+               DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+               deadlineLabel.setText(df.format(item.getDeadline()));
            }
        });
 
@@ -57,7 +60,7 @@ public class MainController {
     public void handleClickListView() {
         TodoItem item = todoListView.getSelectionModel().getSelectedItem();
         itemDetailsTextArea.setText(item.getDetails());
-        deadlineLabel.setText(item.getDeadline().toString());
+//        deadlineLabel.setText(item.getDeadline().toString());
 //        StringBuilder sb = new StringBuilder(item.getDetails());
 //        sb.append("\n\n\n\n");
 //        sb.append("Due: ");

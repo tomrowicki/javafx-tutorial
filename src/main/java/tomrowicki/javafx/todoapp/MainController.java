@@ -1,13 +1,14 @@
 package tomrowicki.javafx.todoapp;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import tomrowicki.javafx.todoapp.datamodel.TodoData;
 import tomrowicki.javafx.todoapp.datamodel.TodoItem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,6 +22,8 @@ public class MainController {
     private TextArea itemDetailsTextArea;
     @FXML
     private Label deadlineLabel;
+    @FXML
+    private BorderPane mainBorderPane;
 
     public void initialize() {
 //        TodoItem item1 = new TodoItem("Birthday card",
@@ -42,6 +45,8 @@ public class MainController {
 //        todoItems = List.of(item1, item2, item3, item4, item5);
 //        TodoData.getInstance().setTodoItems(todoItems);
 
+
+
         todoListView.getSelectionModel().selectedItemProperty()
                 .addListener((observableValue, oldItem, newItem) -> {
                     if (newItem != null) {
@@ -56,6 +61,19 @@ public class MainController {
         // setup for being able to select only one item at a time
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
+    }
+
+    public void showNewItemDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        // setting up parent for the modal window
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("todoItemDialog.fxml"));
+            dialog.getDialogPane().setContent(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

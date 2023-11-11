@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import tomrowicki.javafx.todoapp.datamodel.TodoData;
 import tomrowicki.javafx.todoapp.datamodel.TodoItem;
 
 import java.time.LocalDate;
@@ -22,35 +23,36 @@ public class MainController {
     private Label deadlineLabel;
 
     public void initialize() {
-        TodoItem item1 = new TodoItem("Birthday card",
-                "Buy a birthday card for some person",
-                LocalDate.of(2023, 12, 1));
-        TodoItem item2 = new TodoItem("Doctor's appointment",
-                "Go to the doc",
-                LocalDate.of(2023, 12, 3));
-        TodoItem item3 = new TodoItem("Design proposal",
-                "Finish the design proposal for the very important client",
-                LocalDate.of(2023, 12, 4));
-        TodoItem item4 = new TodoItem("Pickup John",
-                "Pick John up at the train station",
-                LocalDate.of(2023, 12, 5));
-        TodoItem item5 = new TodoItem("Dry cleaning",
-                "Get the clothes on Wednesday",
-                LocalDate.of(2023, 12, 6));
+//        TodoItem item1 = new TodoItem("Birthday card",
+//                "Buy a birthday card for some person",
+//                LocalDate.of(2023, 12, 1));
+//        TodoItem item2 = new TodoItem("Doctor's appointment",
+//                "Go to the doc",
+//                LocalDate.of(2023, 12, 3));
+//        TodoItem item3 = new TodoItem("Design proposal",
+//                "Finish the design proposal for the very important client",
+//                LocalDate.of(2023, 12, 4));
+//        TodoItem item4 = new TodoItem("Pickup John",
+//                "Pick John up at the train station",
+//                LocalDate.of(2023, 12, 5));
+//        TodoItem item5 = new TodoItem("Dry cleaning",
+//                "Get the clothes on Wednesday",
+//                LocalDate.of(2023, 12, 6));
+//
+//        todoItems = List.of(item1, item2, item3, item4, item5);
+//        TodoData.getInstance().setTodoItems(todoItems);
 
-       todoItems = List.of(item1, item2, item3, item4, item5);
+        todoListView.getSelectionModel().selectedItemProperty()
+                .addListener((observableValue, oldItem, newItem) -> {
+                    if (newItem != null) {
+                        TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+                        itemDetailsTextArea.setText(item.getDetails());
+                        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                        deadlineLabel.setText(df.format(item.getDeadline()));
+                    }
+                });
 
-       todoListView.getSelectionModel().selectedItemProperty()
-               .addListener((observableValue, oldItem, newItem) -> {
-           if (newItem != null) {
-               TodoItem item = todoListView.getSelectionModel().getSelectedItem();
-               itemDetailsTextArea.setText(item.getDetails());
-               DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
-               deadlineLabel.setText(df.format(item.getDeadline()));
-           }
-       });
-
-       todoListView.getItems().setAll(todoItems);
+        todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
         // setup for being able to select only one item at a time
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();

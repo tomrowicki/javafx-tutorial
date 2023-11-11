@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tomrowicki.javafx.todoapp.datamodel.TodoData;
 
 import java.io.IOException;
 
@@ -19,5 +20,22 @@ public class TodoApp extends Application {
     public static void main(String[] args) {
         launch();
     }
-}
 
+    @Override
+    public void init() throws Exception {
+        try {
+            TodoData.getInstance().loadTodoItems();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        try {
+            TodoData.getInstance().storeTodoItems();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}

@@ -28,9 +28,9 @@ public class TodoData {
         return instance;
     }
 
-    public void setTodoItems(List<TodoItem> todoItems) {
-        this.todoItems = todoItems;
-    }
+//    public void setTodoItems(List<TodoItem> todoItems) {
+//        this.todoItems = todoItems;
+//    }
 
     public List<TodoItem> getTodoItems() {
         return todoItems;

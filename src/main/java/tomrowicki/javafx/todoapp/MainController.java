@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 public class MainController {
 
@@ -67,12 +68,28 @@ public class MainController {
         Dialog<ButtonType> dialog = new Dialog<>();
         // setting up parent for the modal window
         dialog.initOwner(mainBorderPane.getScene().getWindow());
-        Parent root = null;
+        dialog.setTitle("Add new Todo Item");
+        dialog.setHeaderText("Use this dialog to create a new Todo Item");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("todoItemDialog.fxml"));
         try {
-            root = FXMLLoader.load(getClass().getResource("todoItemDialog.fxml"));
-            dialog.getDialogPane().setContent(root);
+            dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        // adding built-in ok and cancel buttons
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("OK pressed");
+            DialogController controller = fxmlLoader.getController();
+            TodoItem newItem = controller.processResults();
+            todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
+            todoListView.getSelectionModel().select(newItem);
+        } else {
+            System.out.println("Cancel pressed");
         }
     }
 

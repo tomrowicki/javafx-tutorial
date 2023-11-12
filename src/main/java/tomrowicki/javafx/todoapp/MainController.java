@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import tomrowicki.javafx.todoapp.datamodel.TodoData;
 import tomrowicki.javafx.todoapp.datamodel.TodoItem;
 
@@ -61,6 +63,25 @@ public class MainController {
         // setup for being able to select only one item at a time
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
+        // painting item's cell to red if the deadline's today
+        todoListView.setCellFactory(todoItemListView -> {
+            ListCell<TodoItem> cell = new ListCell<>() {
+                @Override
+                protected void updateItem(TodoItem todoItem, boolean empty) {
+                    super.updateItem(todoItem, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(todoItem.getShortDescription());
+                        // determine if the deadline is today, or before today
+                        if (todoItem.getDeadline().isBefore(LocalDate.now().plusDays(1))) {
+                            setTextFill(Color.RED);
+                        }
+                    }
+                }
+            };
+            return cell;
+        });
     }
 
     public void showNewItemDialog() {

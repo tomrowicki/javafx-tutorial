@@ -34,7 +34,7 @@
     <center>
         <VBox style="-fx-background-color: white">
             <!-- this makes the whole tex area grow as much as possible -->
-            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS"/>
+            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS" wrapText="true"/>
             <HBox>
                 <Label text="Due: " style="-fx-background-color: white">
                     <font>

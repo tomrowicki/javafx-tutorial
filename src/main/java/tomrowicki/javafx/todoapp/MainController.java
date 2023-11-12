@@ -47,7 +47,6 @@ public class MainController {
 //        TodoData.getInstance().setTodoItems(todoItems);
 
 
-
         todoListView.getSelectionModel().selectedItemProperty()
                 .addListener((observableValue, oldItem, newItem) -> {
                     if (newItem != null) {
@@ -58,7 +57,7 @@ public class MainController {
                     }
                 });
 
-        todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
+        todoListView.setItems(TodoData.getInstance().getTodoItems());
         // setup for being able to select only one item at a time
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
@@ -83,13 +82,11 @@ public class MainController {
 
         Optional<ButtonType> result = dialog.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("OK pressed");
             DialogController controller = fxmlLoader.getController();
             TodoItem newItem = controller.processResults();
-            todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
+            // using observable lists introduces data binding, so no need for update here
+//            todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
             todoListView.getSelectionModel().select(newItem);
-        } else {
-            System.out.println("Cancel pressed");
         }
     }
 

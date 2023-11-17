@@ -28,6 +28,9 @@ public class MainController {
     @FXML
     private BorderPane mainBorderPane;
 
+    @FXML
+    private ContextMenu listContextMenu;
+
     public void initialize() {
 //        TodoItem item1 = new TodoItem("Birthday card",
 //                "Buy a birthday card for some person",
@@ -48,6 +51,13 @@ public class MainController {
 //        todoItems = List.of(item1, item2, item3, item4, item5);
 //        TodoData.getInstance().setTodoItems(todoItems);
 
+        listContextMenu = new ContextMenu();
+        MenuItem deleteMenuItem = new MenuItem("Delete");
+        deleteMenuItem.setOnAction(actionEvent -> {
+            TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+            deleteItem(item);
+        });
+        listContextMenu.getItems().addAll(deleteMenuItem);
 
         todoListView.getSelectionModel().selectedItemProperty()
                 .addListener((observableValue, oldItem, newItem) -> {
@@ -80,9 +90,19 @@ public class MainController {
                     }
                 }
             };
+            // ensuring that context menu is visible only on non-empty cells
+            cell.emptyProperty().addListener((observableValue, wasEmpty, isEmpty) -> {
+                if (isEmpty) {
+                    cell.setContextMenu(null);
+                } else {
+                    cell.setContextMenu(listContextMenu);
+                }
+            });
             return cell;
         });
     }
+
+
 
     public void showNewItemDialog() {
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -121,5 +141,16 @@ public class MainController {
 //        sb.append("Due: ");
 //        sb.append(item.getDeadline().toString());
 //        itemDetailsTextArea.setText(sb.toString());
+    }
+
+    private void deleteItem(TodoItem item) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Todo Item");
+        alert.setHeaderText("Delete item: " + item.getShortDescription());
+        alert.setContentText("Are you sure? Press OK to confirm, or cancel to back out");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get().equals(ButtonType.OK)) {
+            TodoData.getInstance().deleteTodoItem(item);
+        }
     }
 }

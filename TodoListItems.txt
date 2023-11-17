@@ -1,0 +1,8 @@
+Birthday card	Buy a birthday card for some person	01-12-2023
+Doctor's appointment	Go to the doc	03-12-2023
+Design proposal	Finish the design proposal for the very important client	04-12-2023
+Dry cleaning	Get the clothes on Wednesday	06-12-2023
+dupa	dupadupa	11-11-2023
+new item	this is a new item	12-11-2023
+New selected item	selected item	16-11-2023
+data binding test	test test	12-11-2023

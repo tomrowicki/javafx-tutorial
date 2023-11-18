@@ -1,5 +1,7 @@
 package tomrowicki.javafx.todoapp;
 
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -13,6 +15,7 @@ import tomrowicki.javafx.todoapp.datamodel.TodoItem;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +30,11 @@ public class MainController {
     private Label deadlineLabel;
     @FXML
     private BorderPane mainBorderPane;
-
     @FXML
     private ContextMenu listContextMenu;
+    @FXML
+    private ToggleButton filterToggleButton;
+
 
     public void initialize() {
 //        TodoItem item1 = new TodoItem("Birthday card",
@@ -69,7 +74,11 @@ public class MainController {
                     }
                 });
 
-        todoListView.setItems(TodoData.getInstance().getTodoItems());
+        // sorting the items in accordance with their deadline
+        SortedList<TodoItem> sortedList = new SortedList<>(TodoData.getInstance().getTodoItems(),
+                Comparator.comparing(TodoItem::getDeadline));
+
+        todoListView.setItems(sortedList);
         // setup for being able to select only one item at a time
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
@@ -160,6 +169,14 @@ public class MainController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get().equals(ButtonType.OK)) {
             TodoData.getInstance().deleteTodoItem(item);
+        }
+    }
+
+    public void handleFilterButton(ActionEvent actionEvent) {
+        if (filterToggleButton.isSelected()) {
+
+        } else {
+
         }
     }
 }

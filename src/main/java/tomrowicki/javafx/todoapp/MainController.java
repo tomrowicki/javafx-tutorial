@@ -1,5 +1,7 @@
 package tomrowicki.javafx.todoapp;
 
+import javafx.application.Platform;
+import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +36,7 @@ public class MainController {
     private ContextMenu listContextMenu;
     @FXML
     private ToggleButton filterToggleButton;
+    private FilteredList<TodoItem> filteredList;
 
 
     public void initialize() {
@@ -74,8 +77,13 @@ public class MainController {
                     }
                 });
 
+        // filtering stuff
+        filteredList = new FilteredList<>(TodoData.getInstance().getTodoItems(), todoItem -> {
+           return true;
+        });
+
         // sorting the items in accordance with their deadline
-        SortedList<TodoItem> sortedList = new SortedList<>(TodoData.getInstance().getTodoItems(),
+        SortedList<TodoItem> sortedList = new SortedList<>(filteredList,
                 Comparator.comparing(TodoItem::getDeadline));
 
         todoListView.setItems(sortedList);
@@ -174,9 +182,13 @@ public class MainController {
 
     public void handleFilterButton(ActionEvent actionEvent) {
         if (filterToggleButton.isSelected()) {
-
+            filteredList.setPredicate(todoItem -> todoItem.getDeadline().equals(LocalDate.now()));
         } else {
-
+            filteredList.setPredicate(todoItem -> true);
         }
+    }
+
+    public void handleExit(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }

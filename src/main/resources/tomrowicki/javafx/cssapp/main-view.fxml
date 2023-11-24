@@ -3,17 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" vgap="10" hgap="10" xmlns:fx="http://javafx.com/fxml"
-          fx:controller="tomrowicki.javafx.GridPaneController" stylesheets="@styles.css">
+<GridPane alignment="CENTER" vgap="10" hgap="10" xmlns:fx="http://javafx.com/fxml" fx:id="gridPane"
+          fx:controller="tomrowicki.javafx.cssapp.CssController" stylesheets="@styles.css">
 
-    <Button text="Button one" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <Button text="Open..." onAction="#handleClick" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <Button text="Button two" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
     <!--  note it's not 'fx:id'  -->
     <Button text="Button three" id="button_three" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
-    <Button text="Button four" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+    <Button text="Button four" fx:id="button4" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
     <Button text="Button five" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
 
     <!--    Looks different under different themes -->
     <RadioButton text="Choice 1" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+
+    <Label text="JavaFX Effects" fx:id="label" GridPane.rowIndex="1" GridPane.columnIndex="1"
+    onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" rotate="90"/>
 
 </GridPane>

@@ -1,7 +1,7 @@
 module tomrowicki.javafx {
     requires javafx.controls;
     requires javafx.fxml;
-
+    requires javafx.web;
 
     opens tomrowicki.javafx to javafx.fxml;
     opens tomrowicki.javafx.todoapp;

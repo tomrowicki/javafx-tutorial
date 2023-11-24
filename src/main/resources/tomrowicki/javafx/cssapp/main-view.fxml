@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.web.WebView?>
 <GridPane alignment="CENTER" vgap="10" hgap="10" xmlns:fx="http://javafx.com/fxml" fx:id="gridPane"
           fx:controller="tomrowicki.javafx.cssapp.CssController" stylesheets="@styles.css">
 
@@ -11,7 +12,7 @@
     <!--  note it's not 'fx:id'  -->
     <Button text="Button three" id="button_three" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
     <Button text="Button four" fx:id="button4" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-    <Button text="Button five" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
+    <Button text="Save..." onAction="#saveFile" GridPane.rowIndex="0" GridPane.columnIndex="4"/>
 
     <!--    Looks different under different themes -->
     <RadioButton text="Choice 1" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
@@ -19,4 +20,7 @@
     <Label text="JavaFX Effects" fx:id="label" GridPane.rowIndex="1" GridPane.columnIndex="1"
     onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" rotate="90"/>
 
+    <Hyperlink text="www.javafx.com" GridPane.rowIndex="3" GridPane.columnIndex="0" onAction="#handleLinkClick"/>
+
+    <WebView fx:id="webView" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="5" GridPane.rowSpan="3"/>
 </GridPane>
